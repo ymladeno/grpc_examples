@@ -1,0 +1,26 @@
+syntax = "proto3";
+
+package ivs.systemmanagerservice;
+import "systemmanagerservice_types.proto";
+import "systemmanagerservice_signals.proto";
+
+service SystemManagerService {
+
+   /* Call from client to subscribe for Power State notifications */
+   rpc NotifyOnPowerStateChange (NotifyOnPowerStateChangeRequest) returns (stream PowerStateChangeEvent) {}
+
+   /* Call from client to acknowledge that the power state transition was successful */
+   rpc AcknowledgePowerStateChange (AcknowledgePowerStateChangeRequest) returns (NoResponseRequired) {}
+
+   /* Call to report incident from System Manager service */
+   rpc ReportIncident (ReportIncidentRequest) returns (stream ReportIncidentResponse) {}
+
+   /* Call to notify keep active to System Manager service */
+   rpc NotifyOnKeepActive (stream KeepActiveRequest) returns (NoResponseRequired) {} 
+
+   /* Call to show led to System Manager service */
+   rpc TriggerStatusLeds (StatusLedsRequest) returns (NoResponseRequired) {}
+
+   /* Call to reboot the system */
+   rpc Reboot (RebootRequest) returns (NoResponseRequired) {}
+}

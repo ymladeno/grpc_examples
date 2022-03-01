@@ -1,0 +1,104 @@
+syntax = "proto3";
+
+package ivs.systemmanagerservice;
+import "systemmanagerservice_types.proto";
+
+message NotifyOnPowerStateChangeRequest {
+   string client_id = 1;
+}
+
+message PowerStateChangeEvent {
+    PowerState new_state = 1;
+}
+
+message BatteryInfoResponse {
+    BatteryLevel battery_level = 1;
+    BatteryStatus battery_status = 2;
+    float battery_temperature = 3;
+}
+
+message AcknowledgePowerStateChangeRequest {
+   string client_id = 1;
+   PowerState state = 2;
+}
+
+message NoResponseRequired {
+}
+
+message NoRequestRequired {
+}
+
+message KeepActiveRequest {
+   string client_id = 1;
+}
+
+message ReportIncidentRequest {
+}
+
+message ReportIncidentResponse {
+   string description = 1;
+   string level = 2;
+}
+
+message ButtonEvent {
+    ButtonType type = 1;
+    ButtonEventType event_type = 2;
+}
+
+message PairedDevice {
+   string id = 1;
+   string mac_addr = 2;
+   double battery_level = 3;
+}
+
+message PairingEvent {
+   PairingEventType type = 1;
+   PairedDevice device = 2;
+}
+
+message BTButtonMissingEvent {
+   string mac_addr = 1;
+}
+
+message BTButtonBatteryEvent {
+   string mac_addr = 1;
+   BatteryLevel battery_state = 2;
+}
+
+message StartPairingRequest {
+   int32 timeout_s = 1;
+}
+
+message QueryPairingResponse {
+   PairingStatus status = 1;
+   PairingEventType type = 2;
+   repeated PairedDevice devices = 3;
+}
+
+message StatusLed {
+   StatusLedId id = 1;
+   int32 green_intensity_on = 2;
+   int32 blue_intensity_on = 3;
+   int32 red_intensity_on  = 4;
+   int32 brightness_level_on = 5;
+   int32 on_state_period_ms = 6;
+   int32 green_intensity_off = 7;
+   int32 blue_intensity_off = 8;
+   int32 red_intensity_off = 9;
+   int32 brightness_level_off = 10;
+   int32 off_state_period_ms = 11;
+
+}
+
+message StatusLedsRequest {
+   repeated StatusLed status_leds = 1;
+}
+
+message RebootRequest {
+   /**
+    * set to false if system manager should decide when it
+    * is ready to reboot (e.g. no active operations ongoing)
+    * set to true if a reboot should be forced immediately
+    */
+   bool forced = 1;
+}
