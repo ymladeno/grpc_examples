@@ -27,10 +27,18 @@ class SystemManagerServicer(systemmanagerservice_pb2_grpc.SystemManagerServiceSe
             PowerState.ACTIVE: PowerState.ACTIVE,
         }
 
+    # def sendPowerState(self, request, context):
+    #     print(f" + Client {request.client_id} has subsribed for power state change")
+    #     new_state = self.queue.get(block = True)
+    #     grpc_state = self.convert_power_state[new_state]
+    #     print(f"Send state {new_state}")
+    #     yield systemmanagerservice_signals_pb2.PowerStateChangeEvent(new_state = grpc_state)
+
     def NotifyOnPowerStateChange(self, request, context):
         print(f" + Client {request.client_id} has subsribed for power state change")
         new_state = self.queue.get(block = True)
         grpc_state = self.convert_power_state[new_state]
+        print(f"Send state {new_state}")
         yield systemmanagerservice_signals_pb2.PowerStateChangeEvent(new_state = grpc_state)
 
     def AcknowledgePowerStateChange(self, request, context):

@@ -1,7 +1,6 @@
 syntax = "proto3";
 
-package ivs.systemmanagerservice;
-import "systemmanagerservice_types.proto";
+package grpcexamples;
 import "systemmanagerservice_signals.proto";
 
 service SystemManagerService {

@@ -71,10 +71,15 @@ def run():
 
     client.start_sending_keep_active()
 
-    for response in client.wait_power_state():
-        logger.info(f"Received power state {response}")
-        client.acknowledge_power_state(response)
-        if response.new_state == systemmanagerservice_types_pb2.POWERSTATE__ACTIVE:
+    exit_flag = False
+    while (True):
+        for response in client.wait_power_state():
+            logger.info(f"Received power state {response}")
+            client.acknowledge_power_state(response)
+            if response.new_state == systemmanagerservice_types_pb2.POWERSTATE__ACTIVE:
+                exit_flag = True
+                break
+        if exit_flag:
             break
 
     logger.info(f"LOGN BUTTON PRESS")

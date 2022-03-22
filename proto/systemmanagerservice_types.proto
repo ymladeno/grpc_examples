@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-package ivs.systemmanagerservice;
+package grpcexamples;
 
 enum PowerState {
    POWERSTATE__OFF = 0;

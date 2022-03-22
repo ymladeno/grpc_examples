@@ -1,0 +1,4 @@
+cpp/build/*
+.vscode/*
+python/*_pb2*.py
+python/__pycache__/*

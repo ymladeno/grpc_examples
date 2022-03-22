@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-package ivs.systemmanagerservice;
+package grpcexamples;
 import "systemmanagerservice_types.proto";
 
 message NotifyOnPowerStateChangeRequest {
@@ -87,7 +87,6 @@ message StatusLed {
    int32 red_intensity_off = 9;
    int32 brightness_level_off = 10;
    int32 off_state_period_ms = 11;
-
 }
 
 message StatusLedsRequest {
